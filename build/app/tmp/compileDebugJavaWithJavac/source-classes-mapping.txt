@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/fashionsense/BuildConfig.java
+ com.example.fashionsense.BuildConfig

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "231637694414",
+    "project_id": "fashionsense-645f2",
+    "storage_bucket": "fashionsense-645f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231637694414:android:ba8b4242abe4b4e1801d9f",
+        "android_client_info": {
+          "package_name": "com.example.fashionsense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231637694414-i5ept3n5fqa6821mi4pgbd5a9g0aerus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fashionsense",
+            "certificate_hash": "d8d61adfc458b54a3672ac933bea82deefe8600e"
+          }
+        },
+        {
+          "client_id": "231637694414-kejee0nso4d5499u2vngbhat9bladqie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm6Ync2rmuAG1hSVGeVhSVVsyi20NNnOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231637694414-kejee0nso4d5499u2vngbhat9bladqie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
