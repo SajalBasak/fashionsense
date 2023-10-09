@@ -5,7 +5,7 @@
     android:versionName="1.0.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="20"
         android:targetSdkVersion="30" />
     <!--
          Flutter needs it to communicate with the running application
@@ -14,6 +14,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
 
     <application
@@ -22,6 +27,10 @@
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="fashionsense" >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAul4ZiU0Atv3Hf8Zq3RA-pRdaq020COa4" />
+
         <activity
             android:name="com.example.fashionsense.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -39,6 +48,7 @@
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
+
             <!--
                  Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
@@ -144,7 +154,24 @@
             android:authorities="com.example.fashionsense.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
-            android:initOrder="100" />
+            android:initOrder="100" /> <!-- Needs to be explicitly declared on P+ -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--
+            Service handling Google Sign-In user revocation. For apps that do not integrate with
+            Google Sign-In, this service will never be started.
+        -->
+        <service
+            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+            android:exported="true"
+            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
 
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"

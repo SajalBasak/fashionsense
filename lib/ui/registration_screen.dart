@@ -103,10 +103,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      "Sign Up",
+                      "Sign up",
                       style: TextStyle(
                         fontSize: 35.sp,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                     SizedBox(
@@ -444,9 +444,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               signUp();
                             },
                             child: Text(
-                              "Sign Up",
+                              "Sign up",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 18.sp),
+                                  color: Colors.white, fontSize: 20.sp),
                             ),
                             style: ElevatedButton.styleFrom(
                               primary: AppColors.kPrimaryColor,
@@ -457,34 +457,36 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Wrap(
-                          children: [
-                            Text(
-                              "Don't have an account?",
-                              style: TextStyle(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xFFBBBBBB),
-                              ),
-                            ),
-                            GestureDetector(
-                              child: Text(
-                                " Sign In",
+                        Center(
+                          child: Wrap(
+                            children: [
+                              Text(
+                                "Don't have an account?",
                                 style: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.kPrimaryColor,
+                                  color: const Color(0xFFBBBBBB),
                                 ),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (context) =>
-                                            const LoginScreen()));
-                              },
-                            )
-                          ],
+                              GestureDetector(
+                                child: Text(
+                                  " Sign in",
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.kPrimaryColor,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen()));
+                                },
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),

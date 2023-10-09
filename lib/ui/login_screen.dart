@@ -6,6 +6,8 @@ import 'package:fashionsense/const/app_colors.dart';
 import 'package:fashionsense/ui/registration_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -42,6 +44,53 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Future signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    final result = await FirebaseAuth.instance.signInWithCredential(credential);
+    final user = result.user;
+
+    if (user != null) {
+      Navigator.push(context,
+          CupertinoPageRoute(builder: (_) => const BottomNavCommmon()));
+    } else {
+      Fluttertoast.showToast(msg: "Something is wrong");
+    }
+  }
+
+  // Future signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  //   // Once signed in, return the UserCredential
+  //   final result = await FirebaseAuth.instance
+  //       .signInWithCredential(facebookAuthCredential);
+  //   final user = result.user;
+
+  //   if (user != null) {
+  //     Navigator.push(context,
+  //         CupertinoPageRoute(builder: (_) => const BottomNavCommmon()));
+  //   } else {
+  //     Fluttertoast.showToast(msg: "Something is wrong");
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +108,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      "Sign In",
+                      "Sign in",
                       style: TextStyle(
                         fontSize: 35.sp,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                     SizedBox(
@@ -118,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Center(
                                 child: Icon(
                                   Icons.email_outlined,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   size: 20.w,
                                 ),
                               ),
@@ -159,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Center(
                                 child: Icon(
                                   Icons.lock_outline,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   size: 20.w,
                                 ),
                               ),
@@ -219,9 +268,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               signIn();
                             },
                             child: Text(
-                              "Sign In",
+                              "Sign in",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 18.sp),
+                                  color: Colors.white, fontSize: 20.sp),
                             ),
                             style: ElevatedButton.styleFrom(
                               primary: AppColors.kPrimaryColor,
@@ -232,35 +281,72 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Wrap(
-                          children: [
-                            Text(
-                              "Don't have an account?",
-                              style: TextStyle(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xFFBBBBBB),
-                              ),
-                            ),
-                            GestureDetector(
-                              child: Text(
-                                " Sign Up",
+                        Center(
+                          child: Wrap(
+                            children: [
+                              Text(
+                                "Don't have an account?",
                                 style: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.kPrimaryColor,
+                                  color: const Color(0xFFBBBBBB),
                                 ),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (context) =>
-                                            const RegistrationScreen()));
-                              },
-                            )
+                              GestureDetector(
+                                child: Text(
+                                  " Sign up",
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.kPrimaryColor,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                          builder: (context) =>
+                                              const RegistrationScreen()));
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Center(
+                          child: Text(
+                            "or Sign in with Social Media",
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: signInWithGoogle,
+                              icon: FaIcon(
+                                FontAwesomeIcons.google,
+                                color: Colors.red,
+                              ),
+                            ),
+                            // IconButton(
+                            //   onPressed: signInWithFacebook,
+                            //   icon: FaIcon(
+                            //     FontAwesomeIcons.facebook,
+                            //     color: Colors.blue,
+                            //   ),
+                            // )
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -273,5 +359,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-class BottomNavController {}

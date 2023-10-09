@@ -3,7 +3,9 @@ import 'package:fashionsense/ui/bootm_nav_pages/cart.dart';
 import 'package:fashionsense/ui/bootm_nav_pages/favourite.dart';
 import 'package:fashionsense/ui/bootm_nav_pages/home.dart';
 import 'package:fashionsense/ui/bootm_nav_pages/profile.dart';
+import 'package:fashionsense/ui/pickup_points.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomNavCommmon extends StatefulWidget {
   const BottomNavCommmon({Key? key}) : super(key: key);
@@ -27,9 +29,21 @@ class _BottomNavCommmonState extends State<BottomNavCommmon> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PickupPoints()));
+            },
+            icon: FaIcon(
+              FontAwesomeIcons.mapMarkedAlt,
+              color: Colors.black54,
+            ),
+          )
+        ],
         title: const Text(
           "Fashion : Sense",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: AppColors.kPrimaryColor),
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -48,7 +62,7 @@ class _BottomNavCommmonState extends State<BottomNavCommmon> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite_border_outlined),
             label: "Favourites",
           ),
           BottomNavigationBarItem(
@@ -56,7 +70,7 @@ class _BottomNavCommmonState extends State<BottomNavCommmon> {
             label: "Cart",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_outline),
             label: "Profile",
           ),
         ],

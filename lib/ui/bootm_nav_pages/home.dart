@@ -6,6 +6,7 @@ import 'package:fashionsense/ui/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../product_details_screen.dart';
 
@@ -67,22 +68,57 @@ class _HomeState extends State<Home> {
           children: [
             Padding(
               padding: EdgeInsets.only(left: 20.w, right: 20.w),
-              child: TextFormField(
-                readOnly: true,
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(0)),
-                      borderSide: BorderSide(color: Colors.blue)),
-                  enabledBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(0)),
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: "Search products here",
-                  hintStyle: TextStyle(fontSize: 15.sp),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
+                  elevation: MaterialStateProperty.all<double>(0),
                 ),
-                onTap: () => Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => const SearchScreen())),
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (_) => const SearchScreen(),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Search Products",
+                        style: TextStyle(
+                          fontSize: 25.sp,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
               ),
+              // child: TextFormField(
+              //   readOnly: true,
+              //   decoration: InputDecoration(
+              //     fillColor: Colors.white,
+              //     focusedBorder: const OutlineInputBorder(
+              //         borderRadius: BorderRadius.all(Radius.circular(20)),
+              //         borderSide: BorderSide(color: Colors.blue)),
+              //     enabledBorder: const OutlineInputBorder(
+              //         borderRadius: BorderRadius.all(Radius.circular(0)),
+              //         borderSide: BorderSide(color: Colors.grey)),
+              //     hintText: "Search products here",
+              //     hintStyle: TextStyle(fontSize: 15.sp),
+              //   ),
+              //   onTap: () => Navigator.push(context,
+              //       CupertinoPageRoute(builder: (_) => const SearchScreen())),
+              // ),
             ),
             SizedBox(
               height: 10.h,
@@ -152,8 +188,26 @@ class _HomeState extends State<Home> {
                                 _products[index]["product-img"][0],
                               ),
                             ),
-                            Text("${_products[index]["product-name"]}"),
-                            Text(_products[index]["product-price"].toString()),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              "${_products[index]["product-name"]}",
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Text(
+                              "৳ ${_products[index]["product-price"]}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.kPrimaryColor,
+                              ),
+                            ),
                           ],
                         ),
                       ),

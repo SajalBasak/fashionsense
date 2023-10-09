@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(
-      const Duration(seconds: 4),
+      const Duration(seconds: 6),
       () => Navigator.push(
         context,
         CupertinoPageRoute(
@@ -43,8 +43,9 @@ class _SplashScreenState extends State<SplashScreen> {
             Align(
               alignment: Alignment.center,
               child: Text(
-                "Fashion Sense",
+                "Fashion : Sense",
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 44.sp,
                 ),
               ),
@@ -53,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 20.h,
             ),
             const CircularProgressIndicator(
-              color: Colors.black,
+              color: Colors.white,
             ),
           ],
         ),
